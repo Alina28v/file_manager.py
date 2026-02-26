@@ -1,0 +1,32 @@
+import sys
+import os
+
+def main():
+    # Перевірка аргументів: [0]назва_скрипта, [1]звідки, [2]куди
+    if len(sys.argv) != 3:
+        print(f"Помилка! Використовуйте: python {sys.argv[0]} input.txt output.txt")
+        return
+
+    source = sys.argv[1]
+    destination = sys.argv[2]
+
+    # Перевірка наявності вхідного файлу
+    if not os.path.exists(source):
+        print(f"Помилка: Файл '{source}' не знайдено!")
+        return
+
+    try:
+        # Читання та запис (UTF-8 для підтримки української мови)
+        with open(source, 'r', encoding='utf-8') as f_in:
+            data = f_in.read()
+            
+        with open(destination, 'w', encoding='utf-8') as f_out:
+            f_out.write(data)
+            
+        print(f"Готово! Вміст '{source}' успішно скопійовано в '{destination}'.")
+        
+    except Exception as e:
+        print(f"Сталася помилка: {e}")
+
+if __name__ == "__main__":
+    main()
